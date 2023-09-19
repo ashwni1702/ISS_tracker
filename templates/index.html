@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>ISS Tracker</title>
+</head>
+<body style="background-image: url('{{ url_for('static', filename='img/iss.png') }}');">
+    <div class="container">
+        <h1>ISS Tracker</h1>
+
+        <form method="POST" action="/">
+            <label for="latitude">Enter Your Latitude:</label>
+            <input type="text" name="latitude" id="latitude" placeholder="e.g., 28.704060" required>
+            <br>
+            <label for="longitude">Enter Your Longitude:</label>
+            <input type="text" name="longitude" id="longitude" placeholder="e.g., 77.102493" required>
+            <br>
+            <button type="submit">Check ISS Overhead</button>
+        </form>
+
+        {% if iss_is_overhead_result is defined %}
+        <p>Is ISS Overhead: {% if iss_is_overhead_result %}Yes{% else %}No{% endif %}</p>
+        {% endif %}
+
+        {% if is_dark_now_result is defined %}
+        <p>Is It Dark Now: {% if is_dark_now_result %}Yes{% else %}No{% endif %}</p>
+        {% endif %}
+
+        {% if country_name %}
+        <p>Country: {{ country_name }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
